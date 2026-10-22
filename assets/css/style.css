@@ -749,3 +749,14 @@ code, kbd {
   .burst, .patchy img, .patchy.poked img, .patchy-spot.is-in .patchy { animation: none; }
   .slides img { transition: none; }
 }
+
+.center { text-align: center; }
+
+/* ---------- the fun fact on the home page: two framed rows of save pictures ---------- */
+.fun-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 12px; }
+.fun-pair figure { margin: 0; text-align: center; }
+.fun-row { display: flex; align-items: flex-end; gap: 6px; }
+.fun-row img:first-child { width: 70%; }
+.fun-row img:last-child { width: 29.5%; }
+.fun-pair figcaption { margin-top: 6px; font-weight: 800; font-size: 14px; }
+@media (max-width: 720px) { .fun-pair { grid-template-columns: 1fr; } }

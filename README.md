@@ -11,6 +11,7 @@
   <a href="downloads/SpongeBob-SquigglePants-plus-v1.0.zip"><b>Download v1.0</b></a> &middot;
   <a href="features/">Features</a> &middot;
   <a href="download/">How to Install</a> &middot;
+  <a href="tools/">Tools</a> &middot;
   <a href="credits/">Credits</a>
 </p>
 
@@ -78,7 +79,7 @@ Nothing on your disc or your Wii is changed: the patch only applies while the ga
 
 | Path | What it is |
 | --- | --- |
-| `index.html`, `features/`, `download/`, `credits/` | The website's pages. |
+| `index.html`, `features/`, `download/`, `tools/`, `credits/` | The website's pages. The Tools page is for [VolExtractor](https://github.com/spongebobsquigglepants/volextractor), which unpacks the game's `.vol` archives. |
 | `404.html` | The "page not found" page. It uses paths from the site's root, so it works once the site is at a domain's root. |
 | `assets/` | Styles, script, and images taken from the game's files, the patch's builds and screenshots of the patched game. |
 | `downloads/` | The release zip: the Riivolution XML, the tools that make the patched files, the patch's source code and its own README. |

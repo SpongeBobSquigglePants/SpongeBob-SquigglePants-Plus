@@ -8,7 +8,7 @@ ZIP = 'SpongeBob-SquigglePants-plus-v%s.zip' % VERSION
 TITLE = '<cite>SpongeBob SquigglePants+</cite>'
 GAME = '<cite>SpongeBob SquigglePants</cite>'
 
-PAGES = [('index', 'Home', ''), ('features', 'Features', 'features/'), ('download', 'Download', 'download/'),
+PAGES = [('index', 'Home', ''), ('features', 'Features', 'features/'), ('download', 'Download', 'download/'), ('tools', 'Tools', 'tools/'),
          ('credits', 'Credits', 'credits/')]
 
 
@@ -208,6 +208,30 @@ def home():
       </ul>
     </div>
   </section>
+
+  <section class="box" aria-labelledby="fun-title">
+    <div class="box-inner">
+      <h2 id="fun-title"><img class="title-img" src="assets/images/titles/fun-fact.png" alt="Fun Fact!"/></h2>
+      <p>Tucked away in the game's save files is a stowaway: the save banner and icon of <cite>Batman: The Brave and the Bold - The Videogame</cite>, WayForward's 2010 Wii game. They sit right next to %(g)s' own, but the game never uses them: it only asks for its own banner and icons, which the Wii shows in its Data Management screen.</p>
+      <p>From what we can tell, %(g)s' save system was built on Batman's, and these were left behind when it moved in.</p>
+      <div class="fun-pair">
+        <figure>
+          <div class="fun-row">
+            <img src="assets/images/fun/batman-banner.png" width="664" height="304" alt="The Batman: The Brave and the Bold save banner"/>
+            <img src="assets/images/fun/batman-icon.png" width="280" height="304" alt="The Batman save icon: Batman running"/>
+          </div>
+          <figcaption>Left behind: <cite>Batman</cite>'s banner and icon</figcaption>
+        </figure>
+        <figure>
+          <div class="fun-row">
+            <img src="assets/images/fun/sbsp-banner.png" width="664" height="304" alt="The SpongeBob SquigglePants save banner"/>
+            <img src="assets/images/fun/sbsp-icon.gif" width="280" height="304" alt="The SpongeBob SquigglePants save icon, animated"/>
+          </div>
+          <figcaption>The ones the game uses: %(g)s' banner and icon</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 ''' % {'side': sidebar(r, 'index'), 'imgs': imgs, 't': TITLE, 'g': GAME, 'v': VERSION, 'd': DATE, 'diso': DATE_ISO}
     return (head(r, 'SpongeBob SquigglePants+', 'SpongeBob SquigglePants+: a free fan-made patch for SpongeBob '
                  'SquigglePants on the Wii, with the lost 3DS IconBob games, the cut nanogame &quot;Puzzle de Pants&quot; and the 99% bug fixed.', '')
@@ -384,6 +408,59 @@ def download():
 
 # ---------------------------------------------------------------- credits
 
+VOLX = 'https://github.com/spongebobsquigglepants/volextractor'
+VOLX_FORMATS = [('<code>.image</code>, <code>.texture</code>, <code>.tpl</code>', 'PNG, with transparency'),
+                ('<code>.anim</code>', 'A PNG for each frame, and an animated GIF'),
+                ('<code>.text</code>', 'A spreadsheet (CSV) with a column for each language'),
+                ('<code>.font</code>', 'A PNG sheet of every letter, and a CSV of their sizes'),
+                ('<code>.wave</code>', 'WAV'),
+                ('<code>.arc</code>', 'Unpacked, with what\'s inside converted too')]
+
+
+def tools():
+    r = '../'
+    formats = '\n'.join('          <tr><th>%s</th><td>%s</td></tr>' % f for f in VOLX_FORMATS)
+    body = '''      <div class="guide">
+        <img src="../assets/images/patchy-wham.png" width="323" height="432" alt=""/>
+        <p>Want to see how the game's made? Here be the tools for diggin' through its treasure chest of files!</p>
+      </div>
+
+      <section class="panel" id="volextractor">
+        <h2>VolExtractor</h2>
+        <p>Almost everything in %(g)s is packed into <code>.vol</code> archives: the pictures, animations, text, fonts and sounds. VolExtractor unpacks them and turns what's inside into files you can open.</p>
+        <div class="shot-row">
+          <figure class="shot"><img src="../assets/images/tools/sample-image.jpg" width="854" height="480" alt="The game's own title logo, converted to a PNG"/></figure>
+          <figure class="shot silver"><img src="../assets/images/tools/sample-font.jpg" width="854" height="480" alt="Part of a font's letter sheet"/></figure>
+          <figure class="shot bronze"><img src="../assets/images/tools/sample-anim.gif" width="427" height="240" alt="SpongeBob's loading animation, as a GIF"/></figure>
+        </div>
+        <table class="fixes">
+          <thead><tr><th>In the game</th><th>What you get</th></tr></thead>
+          <tbody>
+%(formats)s
+          </tbody>
+        </table>
+        <p>Every file is also saved exactly as it was stored, so nothing is left out.</p>
+        <div class="callout"><b>Made for %(g)s on the Wii.</b> Other games built with WayForward's engine, EngineBlack, may use some of the same formats, but they haven't been tested. Not all of them use <code>.vol</code> archives: <cite>Batman: The Brave and the Bold - The Videogame</cite> on the Wii doesn't, for one.</div>
+        <a class="stack-btn" href="%(x)s/archive/refs/heads/main.zip"><small>click here to</small>Download VolExtractor</a>
+        <p class="center"><a href="%(x)s" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> See it on GitHub</a></p>
+      </section>
+
+      <section class="panel">
+        <h2>How to Use It</h2>
+        <ol class="steps">
+          <li><b>Get Python.</b>Install <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python 3</a> (on Windows, tick <em>Add python.exe to PATH</em>). VolExtractor installs the one extra package it needs the first time.</li>
+          <li><b>Copy the game's archives.</b>In Dolphin, right-click the game, choose <em>Properties</em>, then <em>Filesystem</em>, and extract the <code>.vol</code> files into the VolExtractor folder.</li>
+          <li><b>Run it.</b>Double-click <code>extract_all.bat</code> (Windows) or run <code>extract_all.sh</code> (Mac or Linux). You can also drag files or folders onto <code>extract_all.bat</code>.</li>
+          <li><b>Look inside.</b>Each archive gets a <code>_extracted</code> folder next to it, with <code>raw</code> (the files as stored) and <code>converted</code> (the files you can open).</li>
+        </ol>
+        <div class="callout"><b>No game files are included.</b> VolExtractor only reads the copy of the game you already own.</div>
+      </section>
+''' % {'g': GAME, 'formats': formats, 'x': VOLX}
+    return (head(r, 'Tools | SpongeBob SquigglePants+', 'VolExtractor: unpack the .vol archives of SpongeBob SquigglePants '
+                 'into pictures, animations, text, fonts and sounds.', 'tools/')
+            + header(r, 'tools') + inner(r, 'tools', 'tools', 'Tools', body) + footer(r, 'tools'))
+
+
 def credits():
     r = '../'
     body = '''      <div class="guide">
@@ -434,7 +511,7 @@ def not_found():
 
 
 def main():
-    out = {'index.html': home(), 'features/index.html': features(), 'download/index.html': download(),
+    out = {'index.html': home(), 'features/index.html': features(), 'download/index.html': download(), 'tools/index.html': tools(),
            'credits/index.html': credits(), '404.html': not_found()}
     for path, html in out.items():
         p = os.path.join(OUT, path)
