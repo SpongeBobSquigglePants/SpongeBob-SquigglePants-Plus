@@ -83,8 +83,9 @@ Nothing on your disc or your Wii is changed: the patch only applies while the ga
 | `assets/` | Styles, script, and images taken from the game's files, the patch's builds and screenshots of the patched game. |
 | `downloads/` | The release zip: the Riivolution XML, the tools that make the patched files, the patch's source code and its own README. |
 | `make_pages.py` | Builds the HTML pages (not needed on the server). |
+| `CNAME` | The site's address, `sbsp-plus.wubbzp.com`, for GitHub Pages. |
 
-The site is static: upload everything to any web host, or turn on GitHub Pages for this repository. Fonts (Nunito) and icons (Font Awesome) load from Google Fonts and cdnjs.
+The site is static and lives at [sbsp-plus.wubbzp.com](https://sbsp-plus.wubbzp.com/), served by GitHub Pages from this repository; it works on any other web host too. Fonts (Nunito) and icons (Font Awesome) load from Google Fonts and cdnjs.
 
 ## Credits
 

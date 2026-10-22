@@ -3,6 +3,7 @@ import os
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 VERSION, DATE, DATE_ISO = '1.0', '22 October 2026', '2026-10-22'
+SITE = 'https://sbsp-plus.wubbzp.com/'  # the site's address, for link previews and search engines
 ZIP = 'SpongeBob-SquigglePants-plus-v%s.zip' % VERSION
 TITLE = '<cite>SpongeBob SquigglePants+</cite>'
 GAME = '<cite>SpongeBob SquigglePants</cite>'
@@ -11,7 +12,9 @@ PAGES = [('index', 'Home', ''), ('features', 'Features', 'features/'), ('downloa
          ('credits', 'Credits', 'credits/')]
 
 
-def head(root, title, desc):
+def head(root, title, desc, path=None):
+    """path: the page's address under SITE ('' for the home page), or None for a page with no address of its own."""
+    url = SITE + path if path is not None else None
     return '''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,14 +22,26 @@ def head(root, title, desc):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>%(title)s</title>
 <meta name="description" content="%(desc)s"/>
+<meta name="author" content="Mitch &quot;WubbzP&quot; Bentz"/>
 <meta name="theme-color" content="#1d74bd"/>
-<link rel="icon" type="image/png" sizes="32x32" href="%(r)sassets/icons/plus-32.png"/>
+%(canon)s<link rel="icon" type="image/png" sizes="32x32" href="%(r)sassets/icons/plus-32.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="%(r)sassets/icons/plus-192.png"/>
 <link rel="apple-touch-icon" href="%(r)sassets/icons/plus-192.png"/>
+<meta property="og:site_name" content="SpongeBob SquigglePants+"/>
 <meta property="og:title" content="%(title)s"/>
 <meta property="og:description" content="%(desc)s"/>
 <meta property="og:type" content="website"/>
-<meta property="og:image" content="%(r)sassets/images/og-image.jpg"/>
+<meta property="og:locale" content="en_US"/>
+%(ogurl)s<meta property="og:image" content="%(site)sassets/images/og-image.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="The SpongeBob SquigglePants+ logo"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@wubbzp"/>
+<meta name="twitter:title" content="%(title)s"/>
+<meta name="twitter:description" content="%(desc)s"/>
+<meta name="twitter:image" content="%(site)sassets/images/og-image.jpg"/>
+<meta name="twitter:image:alt" content="The SpongeBob SquigglePants+ logo"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&amp;display=swap"/>
@@ -37,7 +52,9 @@ def head(root, title, desc):
 <body>
 <a class="skip-link" href="#content">Skip to content</a>
 <div class="site">
-''' % {'title': title, 'desc': desc, 'r': root}
+''' % {'title': title, 'desc': desc, 'r': root, 'site': SITE,
+       'canon': '<link rel="canonical" href="%s"/>\n' % url if url else '',
+       'ogurl': '<meta property="og:url" content="%s"/>\n' % url if url else ''}
 
 
 def header(root, current):
@@ -193,7 +210,7 @@ def home():
   </section>
 ''' % {'side': sidebar(r, 'index'), 'imgs': imgs, 't': TITLE, 'g': GAME, 'v': VERSION, 'd': DATE, 'diso': DATE_ISO}
     return (head(r, 'SpongeBob SquigglePants+', 'SpongeBob SquigglePants+: a free fan-made patch for SpongeBob '
-                 'SquigglePants on the Wii, with the lost 3DS IconBob games, the cut nanogame &quot;Puzzle de Pants&quot; and the 99% bug fixed.')
+                 'SquigglePants on the Wii, with the lost 3DS IconBob games, the cut nanogame &quot;Puzzle de Pants&quot; and the 99% bug fixed.', '')
             + header(r, 'index') + body + footer(r, 'index'))
 
 
@@ -289,7 +306,7 @@ def features():
       </section>
 ''' % {'games': games, 'fixes': fixes, 'logos': logos, 't': TITLE}
     return (head(r, 'Features | SpongeBob SquigglePants+', 'Everything SpongeBob SquigglePants+ adds: the IconBob games, '
-                 '&quot;Puzzle de Pants&quot;, the 100% fix, corrected titles and more.')
+                 '&quot;Puzzle de Pants&quot;, the 100% fix, corrected titles and more.', 'features/')
             + header(r, 'features') + inner(r, 'features', 'features', 'Features', body) + footer(r, 'features'))
 
 
@@ -361,7 +378,7 @@ def download():
       </section>
 ''' % {'v': VERSION, 'd': DATE, 'g': GAME, 't': TITLE, 'zip': ZIP, 'opts': opts}
     return (head(r, 'Download | SpongeBob SquigglePants+', 'Download SpongeBob SquigglePants+ and how to install it with '
-                 'Riivolution or Dolphin.')
+                 'Riivolution or Dolphin.', 'download/')
             + header(r, 'download') + inner(r, 'download', 'download', 'Download', body) + footer(r, 'download'))
 
 
@@ -400,7 +417,7 @@ def credits():
         <p>And to Sandmanfan, Berdstep, Rnjwalkthroughs, Andykishore and KyoakuNaKira.</p>
       </section>
 ''' % {'t': TITLE, 'g': GAME}
-    return (head(r, 'Credits | SpongeBob SquigglePants+', 'Who made SpongeBob SquigglePants+, and the original game.')
+    return (head(r, 'Credits | SpongeBob SquigglePants+', 'Who made SpongeBob SquigglePants+, and the original game.', 'credits/')
             + header(r, 'credits') + inner(r, 'credits', 'credits', 'Credits', body) + footer(r, 'credits'))
 
 
