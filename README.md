@@ -79,7 +79,7 @@ Nothing on your disc or your Wii is changed: the patch only applies while the ga
 
 | Path | What it is |
 | --- | --- |
-| `index.html`, `features/`, `download/`, `tools/`, `credits/` | The website's pages. The Tools page is for [VolExtractor](https://github.com/spongebobsquigglepants/volextractor), which unpacks the game's `.vol` archives. |
+| `index.html`, `features/`, `download/`, `tools/`, `credits/` | The website's pages. The Tools page is for [VolKit](https://github.com/spongebobsquigglepants/volkit), which unpacks the game's `.vol` archives, edits them and packs them back. |
 | `404.html` | The "page not found" page. It uses paths from the site's root, so it works once the site is at a domain's root. |
 | `assets/` | Styles, script, and images taken from the game's files, the patch's builds and screenshots of the patched game. |
 | `downloads/` | The release zip: the Riivolution XML, the tools that make the patched files, the patch's source code and its own README. |

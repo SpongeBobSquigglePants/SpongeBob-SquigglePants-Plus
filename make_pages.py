@@ -408,56 +408,63 @@ def download():
 
 # ---------------------------------------------------------------- credits
 
-VOLX = 'https://github.com/spongebobsquigglepants/volextractor'
-VOLX_FORMATS = [('<code>.image</code>, <code>.texture</code>, <code>.tpl</code>', 'PNG, with transparency'),
-                ('<code>.anim</code>', 'A PNG for each frame, and an animated GIF'),
-                ('<code>.text</code>', 'A spreadsheet (CSV) with a column for each language'),
-                ('<code>.font</code>', 'A PNG sheet of every letter, and a CSV of their sizes'),
-                ('<code>.wave</code>', 'WAV'),
-                ('<code>.arc</code>', 'Unpacked, with what\'s inside converted too')]
+VOLKIT = 'https://github.com/spongebobsquigglepants/volkit'
+VOLKIT_FORMATS = [('<code>.image</code>, <code>.texture</code>', 'PNG, with transparency', 'Yes, from a PNG of any size'),
+                  ('<code>.anim</code>', 'A PNG for each frame, and an animated GIF', 'Yes, frame by frame'),
+                  ('<code>.text</code>', 'A spreadsheet (CSV) with a column for each language', 'Yes, or edit it in VolKit'),
+                  ('<code>.wave</code>', 'WAV', 'Yes, from any WAV'),
+                  ('<code>.font</code>', 'A PNG sheet of every letter', '<span class="not-yet">Not yet</span>'),
+                  ('<code>.arc</code>, <code>.tpl</code>', 'Unpacked, or a PNG', '<span class="not-yet">Not yet</span>')]
 
 
 def tools():
     r = '../'
-    formats = '\n'.join('          <tr><th>%s</th><td>%s</td></tr>' % f for f in VOLX_FORMATS)
+    formats = '\n'.join('          <tr><th>%s</th><td>%s</td><td>%s</td></tr>' % f for f in VOLKIT_FORMATS)
     body = '''      <div class="guide">
         <img src="../assets/images/patchy-wham.png" width="323" height="432" alt=""/>
-        <p>Want to see how the game's made? Here be the tools for diggin' through its treasure chest of files!</p>
+        <p>Want to see how the game's made, or make it yer own? Here be the tools for diggin' through its treasure chest of files!</p>
       </div>
 
-      <section class="panel" id="volextractor">
-        <h2>VolExtractor</h2>
-        <p>Almost everything in %(g)s is packed into <code>.vol</code> archives: the pictures, animations, text, fonts and sounds. VolExtractor unpacks them and turns what's inside into files you can open.</p>
+      <section class="panel" id="volkit">
+        <h2>VolKit</h2>
+        <p>Almost everything in %(g)s is packed into <code>.vol</code> archives: the pictures, animations, text, fonts and sounds. VolKit opens them up, lets you change what's inside, and puts it all back so the game can use it.</p>
+        <figure class="shot"><img src="../assets/images/tools/volkit-window.png" width="1100" height="640" alt="The VolKit window, playing SpongeBob's loading animation"/></figure>
+        <ul>
+          <li><b>The VolKit window:</b> browse an archive, see the pictures, play the animations and sounds, edit the text in all six languages, swap in your own files and save.</li>
+          <li><b>VolExtractor:</b> unpacks whole archives into files you can open.</li>
+          <li><b>VolPacker:</b> packs your edited files back into a working archive.</li>
+        </ul>
         <div class="shot-row">
           <figure class="shot"><img src="../assets/images/tools/sample-image.jpg" width="854" height="480" alt="The game's own title logo, converted to a PNG"/></figure>
           <figure class="shot silver"><img src="../assets/images/tools/sample-font.jpg" width="854" height="480" alt="Part of a font's letter sheet"/></figure>
           <figure class="shot bronze"><img src="../assets/images/tools/sample-anim.gif" width="427" height="240" alt="SpongeBob's loading animation, as a GIF"/></figure>
         </div>
         <table class="fixes">
-          <thead><tr><th>In the game</th><th>What you get</th></tr></thead>
+          <thead><tr><th>In the game</th><th>What you get</th><th>Back into the game?</th></tr></thead>
           <tbody>
 %(formats)s
           </tbody>
         </table>
-        <p>Every file is also saved exactly as it was stored, so nothing is left out.</p>
+        <p>Every file can also be saved, or replaced, exactly as it's stored. Files you don't touch keep their exact bytes.</p>
         <div class="callout"><b>Made for %(g)s on the Wii.</b> Other games built with WayForward's engine, EngineBlack, may use some of the same formats, but they haven't been tested. Not all of them use <code>.vol</code> archives: <cite>Batman: The Brave and the Bold - The Videogame</cite> on the Wii doesn't, for one.</div>
-        <a class="stack-btn" href="%(x)s/archive/refs/heads/main.zip"><small>click here to</small>Download VolExtractor</a>
+        <a class="stack-btn" href="%(x)s/archive/refs/heads/main.zip"><small>click here to</small>Download VolKit</a>
         <p class="center"><a href="%(x)s" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> See it on GitHub</a></p>
       </section>
 
       <section class="panel">
         <h2>How to Use It</h2>
         <ol class="steps">
-          <li><b>Get Python.</b>Install <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python 3</a> (on Windows, tick <em>Add python.exe to PATH</em>). VolExtractor installs the one extra package it needs the first time.</li>
-          <li><b>Copy the game's archives.</b>In Dolphin, right-click the game, choose <em>Properties</em>, then <em>Filesystem</em>, and extract the <code>.vol</code> files into the VolExtractor folder.</li>
-          <li><b>Run it.</b>Double-click <code>extract_all.bat</code> (Windows) or run <code>extract_all.sh</code> (Mac or Linux). You can also drag files or folders onto <code>extract_all.bat</code>.</li>
-          <li><b>Look inside.</b>Each archive gets a <code>_extracted</code> folder next to it, with <code>raw</code> (the files as stored) and <code>converted</code> (the files you can open).</li>
+          <li><b>Get Python.</b>Install <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python 3</a> (on Windows, tick <em>Add python.exe to PATH</em>). VolKit installs the one extra package it needs the first time.</li>
+          <li><b>Copy the game's archives.</b>In Dolphin, right-click the game, choose <em>Properties</em>, then <em>Filesystem</em>, and extract the <code>.vol</code> files. Keep a copy of the originals.</li>
+          <li><b>Open one.</b>Double-click <code>VolKit.bat</code> (Windows) or run <code>volkit.sh</code> (Mac or Linux), and open a <code>.vol</code>. Pick a file to see it; double-click a line of text to change it; use <em>Replace</em> to swap in a PNG, CSV or WAV.</li>
+          <li><b>Save, and play.</b>Save the archive, then try it in Dolphin, or load it with Riivolution. VolKit's README shows how.</li>
         </ol>
-        <div class="callout"><b>No game files are included.</b> VolExtractor only reads the copy of the game you already own.</div>
+        <p>Rather work on lots of files at once? <code>extract_all</code> unpacks every archive into folders, and after you've edited the files, <code>pack_all</code> packs them back up.</p>
+        <div class="callout"><b>No game files are included.</b> VolKit only reads the copy of the game you already own.</div>
       </section>
-''' % {'g': GAME, 'formats': formats, 'x': VOLX}
-    return (head(r, 'Tools | SpongeBob SquigglePants+', 'VolExtractor: unpack the .vol archives of SpongeBob SquigglePants '
-                 'into pictures, animations, text, fonts and sounds.', 'tools/')
+''' % {'g': GAME, 'formats': formats, 'x': VOLKIT}
+    return (head(r, 'Tools | SpongeBob SquigglePants+', 'VolKit: open the .vol archives of SpongeBob SquigglePants, '
+                 'change the pictures, animations, text and sounds inside, and put them back.', 'tools/')
             + header(r, 'tools') + inner(r, 'tools', 'tools', 'Tools', body) + footer(r, 'tools'))
 
 

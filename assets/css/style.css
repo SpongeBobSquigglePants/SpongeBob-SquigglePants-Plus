@@ -760,3 +760,4 @@ code, kbd {
 .fun-row img:last-child { width: 29.5%; }
 .fun-pair figcaption { margin-top: 6px; font-weight: 800; font-size: 14px; }
 @media (max-width: 720px) { .fun-pair { grid-template-columns: 1fr; } }
+.fixes .not-yet { color: #b45309; }
