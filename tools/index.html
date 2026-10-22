@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>Tools | SpongeBob SquigglePants+</title>
-<meta name="description" content="VolKit: open the .vol archives of SpongeBob SquigglePants, change the pictures, animations, text and sounds inside, and put them back."/>
+<meta name="description" content="VolKit and SoundKit: change the pictures, text and sounds of SpongeBob SquigglePants, and listen to and save its music."/>
 <meta name="author" content="Mitch &quot;WubbzP&quot; Bentz"/>
 <meta name="theme-color" content="#1d74bd"/>
 <link rel="canonical" href="https://sbsp-plus.wubbzp.com/tools/"/>
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="../assets/icons/plus-192.png"/>
 <meta property="og:site_name" content="SpongeBob SquigglePants+"/>
 <meta property="og:title" content="Tools | SpongeBob SquigglePants+"/>
-<meta property="og:description" content="VolKit: open the .vol archives of SpongeBob SquigglePants, change the pictures, animations, text and sounds inside, and put them back."/>
+<meta property="og:description" content="VolKit and SoundKit: change the pictures, text and sounds of SpongeBob SquigglePants, and listen to and save its music."/>
 <meta property="og:type" content="website"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://sbsp-plus.wubbzp.com/tools/"/>
@@ -24,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="@wubbzp"/>
 <meta name="twitter:title" content="Tools | SpongeBob SquigglePants+"/>
-<meta name="twitter:description" content="VolKit: open the .vol archives of SpongeBob SquigglePants, change the pictures, animations, text and sounds inside, and put them back."/>
+<meta name="twitter:description" content="VolKit and SoundKit: change the pictures, text and sounds of SpongeBob SquigglePants, and listen to and save its music."/>
 <meta name="twitter:image" content="https://sbsp-plus.wubbzp.com/assets/images/og-image.jpg"/>
 <meta name="twitter:image:alt" content="The SpongeBob SquigglePants+ logo"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -102,7 +102,7 @@
       </section>
 
       <section class="panel">
-        <h2>How to Use It</h2>
+        <h2>How to Use VolKit</h2>
         <ol class="steps">
           <li><b>Get Python.</b>Install <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python 3</a> (on Windows, tick <em>Add python.exe to PATH</em>). VolKit installs the one extra package it needs the first time.</li>
           <li><b>Copy the game's archives.</b>In Dolphin, right-click the game, choose <em>Properties</em>, then <em>Filesystem</em>, and extract the <code>.vol</code> files. Keep a copy of the originals.</li>
@@ -111,6 +111,20 @@
         </ol>
         <p>Rather work on lots of files at once? <code>extract_all</code> unpacks every archive into folders, and after you've edited the files, <code>pack_all</code> packs them back up.</p>
         <div class="callout"><b>No game files are included.</b> VolKit only reads the copy of the game you already own.</div>
+      </section>
+
+      <section class="panel" id="soundkit">
+        <h2>SoundKit</h2>
+        <p>The music of <cite>SpongeBob SquigglePants</cite> isn't recorded audio: the Wii plays it from note data and instrument samples, the way a MIDI file is played. SoundKit plays it the same way, from the game's own sound archives, so you can listen to it all and save it as an album.</p>
+        <figure class="shot"><img src="../assets/images/tools/soundkit-jukebox.png" width="1000" height="640" alt="The SoundKit jukebox, playing the title screen music"/></figure>
+        <ul>
+          <li><b>The jukebox:</b> the soundtrack world by world, with each nanogame theme named after the nanogames that play it. Double-click to listen.</li>
+          <li><b>The album:</b> <cite>SpongeBob SquigglePants (Original Soundtrack)</cite> by Jake Kaufman, tagged and numbered, as WAV, FLAC, OGG or MP3, to listen to or to loop seamlessly.</li>
+          <li><b>MIDI and SoundFonts:</b> every track as a MIDI file, and the game's instruments as SoundFonts, to play them with the game's own sound or rearrange them.</li>
+        </ul>
+        <div class="callout"><b>Found on the disc:</b> a second sound archive the game never loads, with 14 more tracks. The IconBob games, "Pairing Is Caring", "Puzzle de Pants" and "No Shame in Same" ask for music that's only in it, so they never get it on the Wii (the IconBob games play the metronome track instead). SoundKit plays it all.</div>
+        <a class="stack-btn" href="https://github.com/spongebobsquigglepants/soundkit/archive/refs/heads/main.zip"><small>click here to</small>Download SoundKit</a>
+        <p class="center"><a href="https://github.com/spongebobsquigglepants/soundkit" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> See it on GitHub</a></p>
       </section>
 
     </main>

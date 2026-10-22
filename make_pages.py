@@ -242,7 +242,7 @@ def home():
 
 ICONBOB = ['Gary Is Going Places', 'SpongeBob Says', 'Chum Is Fum', 'Jellyfish Joy Ride', 'Candid Krabs', 'To Dive For',
            'Bikini Bottom on Ice']
-FIXES = [('Sea is for Coloring', 'Sea Is for Coloring'), ("Rollin' With My Homies", "Rollin' with My Homies"),
+FIXES = [('Sea is for Coloring', 'Sea Is for Coloring'), ("Rollin' With My Homies", "Rolling with My Homies"),
          ('The Show Off Show', 'The Show-Off Show'), ('Mr. Krabs Cash Grab', "Mr. Krabs' Cash Grab"),
          ('Ping Pong Pals', 'Ping-Pong Pals'), ('Water You Waving For', 'Water You Waving For?'),
          ('That Takes The Spongecake', 'That Takes the Spongecake'), ('Select A World', 'Select a World')]
@@ -301,7 +301,7 @@ def features():
         <h2>Fixes and Touch-Ups</h2>
         <figure class="shot"><img src="../assets/images/shots/credits.jpg" width="854" height="480" alt="The credits, with the new lines"/></figure>
         <h3>Corrected titles</h3>
-        <p>Twenty nanogame titles are set in proper title case, and menu text is tidied up:</p>
+        <p>Twenty nanogame and minigame titles are set in proper title case, and menu text is tidied up:</p>
         <table class="fixes">
           <thead><tr><th>Before</th><th>After</th></tr></thead>
           <tbody>
@@ -409,6 +409,7 @@ def download():
 # ---------------------------------------------------------------- credits
 
 VOLKIT = 'https://github.com/spongebobsquigglepants/volkit'
+SOUNDKIT = 'https://github.com/spongebobsquigglepants/soundkit'
 VOLKIT_FORMATS = [('<code>.image</code>, <code>.texture</code>', 'PNG, with transparency', 'Yes, from a PNG of any size'),
                   ('<code>.anim</code>', 'A PNG for each frame, and an animated GIF', 'Yes, frame by frame'),
                   ('<code>.text</code>', 'A spreadsheet (CSV) with a column for each language', 'Yes, or edit it in VolKit'),
@@ -452,7 +453,7 @@ def tools():
       </section>
 
       <section class="panel">
-        <h2>How to Use It</h2>
+        <h2>How to Use VolKit</h2>
         <ol class="steps">
           <li><b>Get Python.</b>Install <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python 3</a> (on Windows, tick <em>Add python.exe to PATH</em>). VolKit installs the one extra package it needs the first time.</li>
           <li><b>Copy the game's archives.</b>In Dolphin, right-click the game, choose <em>Properties</em>, then <em>Filesystem</em>, and extract the <code>.vol</code> files. Keep a copy of the originals.</li>
@@ -462,9 +463,23 @@ def tools():
         <p>Rather work on lots of files at once? <code>extract_all</code> unpacks every archive into folders, and after you've edited the files, <code>pack_all</code> packs them back up.</p>
         <div class="callout"><b>No game files are included.</b> VolKit only reads the copy of the game you already own.</div>
       </section>
-''' % {'g': GAME, 'formats': formats, 'x': VOLKIT}
-    return (head(r, 'Tools | SpongeBob SquigglePants+', 'VolKit: open the .vol archives of SpongeBob SquigglePants, '
-                 'change the pictures, animations, text and sounds inside, and put them back.', 'tools/')
+
+      <section class="panel" id="soundkit">
+        <h2>SoundKit</h2>
+        <p>The music of %(g)s isn't recorded audio: the Wii plays it from note data and instrument samples, the way a MIDI file is played. SoundKit plays it the same way, from the game's own sound archives, so you can listen to it all and save it as an album.</p>
+        <figure class="shot"><img src="../assets/images/tools/soundkit-jukebox.png" width="1000" height="640" alt="The SoundKit jukebox, playing the title screen music"/></figure>
+        <ul>
+          <li><b>The jukebox:</b> the soundtrack world by world, with each nanogame theme named after the nanogames that play it. Double-click to listen.</li>
+          <li><b>The album:</b> <cite>SpongeBob SquigglePants (Original Soundtrack)</cite> by Jake Kaufman, tagged and numbered, as WAV, FLAC, OGG or MP3, to listen to or to loop seamlessly.</li>
+          <li><b>MIDI and SoundFonts:</b> every track as a MIDI file, and the game's instruments as SoundFonts, to play them with the game's own sound or rearrange them.</li>
+        </ul>
+        <div class="callout"><b>Found on the disc:</b> a second sound archive the game never loads, with 14 more tracks. The IconBob games, "Pairing Is Caring", "Puzzle de Pants" and "No Shame in Same" ask for music that's only in it, so they never get it on the Wii (the IconBob games play the metronome track instead). SoundKit plays it all.</div>
+        <a class="stack-btn" href="%(sk)s/archive/refs/heads/main.zip"><small>click here to</small>Download SoundKit</a>
+        <p class="center"><a href="%(sk)s" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> See it on GitHub</a></p>
+      </section>
+''' % {'g': GAME, 'formats': formats, 'x': VOLKIT, 'sk': SOUNDKIT}
+    return (head(r, 'Tools | SpongeBob SquigglePants+', 'VolKit and SoundKit: change the pictures, text and sounds '
+                 'of SpongeBob SquigglePants, and listen to and save its music.', 'tools/')
             + header(r, 'tools') + inner(r, 'tools', 'tools', 'Tools', body) + footer(r, 'tools'))
 
 
